@@ -1,0 +1,5 @@
+export enum ENUM_QUESTION_DIFFICULTY {
+  EASY = 'EASY',
+  MEDIUM = 'MEDIUM',
+  HARD = 'HARD',
+}

@@ -1,13 +1,15 @@
-import { Injectable } from '@nestjs/common'
-import { QuizRepository } from '../repository/repositories/quiz.repository'
-import { IDatabaseFindOneOptions } from '@infras/database/interfaces/database.interface'
-import { QuizDoc } from '../repository/entities/quiz.entity'
+import {DatabaseGenericServiceAbstract} from '@infras/database/abstracts/database.generic.service.abstract'
+import {DatabaseModel} from '@infras/database/decorators/database.decorator'
+import {Injectable} from '@nestjs/common'
+import {Model} from 'mongoose'
+import {QuizDoc, QuizEntity} from '../repository/entities/quiz.entity'
 
 @Injectable()
-export class QuizService {
-    constructor(private readonly quizRepository: QuizRepository) {}
-
-    async findOne(find: Record<string, any>, options?: IDatabaseFindOneOptions): Promise<QuizDoc> {
-        return this.quizRepository.findOne(find, options)
-    }
+export class QuizService extends DatabaseGenericServiceAbstract<QuizEntity, QuizDoc> {
+  constructor(
+    @DatabaseModel(QuizEntity.name)
+    private readonly quizModel: Model<QuizEntity>
+  ) {
+    super(quizModel)
+  }
 }

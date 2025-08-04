@@ -1,118 +1,106 @@
 import {
-    IDatabaseCreateManyOptions,
-    IDatabaseCreateOptions,
-    IDatabaseExistOptions,
-    IDatabaseFindAllOptions,
-    IDatabaseFindOneOptions,
-    IDatabaseManyOptions,
-    IDatabaseOptions,
+  IDatabaseCreateManyOptions,
+  IDatabaseCreateOptions,
+  IDatabaseExistOptions,
+  IDatabaseFindAllOptions,
+  IDatabaseFindOneOptions,
+  IDatabaseManyOptions,
+  IDatabaseOptions,
 } from '@infras/database/interfaces/database.interface'
-import { RoleCreateDto } from '@infras/role/dtos/role.create.dto'
-import { RoleUpdatePermissionDto } from '@infras/role/dtos/role.update-permission.dto'
-import { RoleUpdateDto } from '@infras/role/dtos/role.update.dto'
-import { IRoleService } from '@infras/role/interfaces/role.service.interface'
-import { RoleDoc, RoleEntity } from '@infras/role/repository/entities/role.entity'
-import { RoleRepository } from '@infras/role/repository/repositories/role.repository'
-import { Injectable } from '@nestjs/common'
+import {RoleCreateDto} from '@infras/role/dtos/role.create.dto'
+import {RoleUpdatePermissionDto} from '@infras/role/dtos/role.update-permission.dto'
+import {RoleUpdateDto} from '@infras/role/dtos/role.update.dto'
+import {IRoleService} from '@infras/role/interfaces/role.service.interface'
+import {RoleDoc, RoleEntity} from '@infras/role/repository/entities/role.entity'
+import {RoleRepository} from '@infras/role/repository/repositories/role.repository'
+import {Injectable} from '@nestjs/common'
 
 @Injectable()
 export class RoleService implements IRoleService {
-    constructor(private readonly roleRepository: RoleRepository) {}
+  constructor(private readonly roleRepository: RoleRepository) {}
 
-    async findAll(
-        find?: Record<string, any>,
-        options?: IDatabaseFindAllOptions
-    ): Promise<RoleEntity[]> {
-        return this.roleRepository.findAll<RoleEntity>(find, options)
-    }
+  async findAll(find?: Record<string, any>, options?: IDatabaseFindAllOptions): Promise<RoleEntity[]> {
+    return this.roleRepository.findAll<RoleEntity>(find, options)
+  }
 
-    async findOneById(_id: string, options?: IDatabaseFindOneOptions): Promise<RoleDoc> {
-        return this.roleRepository.findOneById<RoleDoc>(_id, options)
-    }
+  async findOneById(_id: string, options?: IDatabaseFindOneOptions): Promise<RoleDoc> {
+    return this.roleRepository.findOneById<RoleDoc>(_id, options)
+  }
 
-    async findOne(find: Record<string, any>, options?: IDatabaseFindOneOptions): Promise<RoleDoc> {
-        return this.roleRepository.findOne<RoleDoc>(find, options)
-    }
+  async findOne(find: Record<string, any>, options?: IDatabaseFindOneOptions): Promise<RoleDoc> {
+    return this.roleRepository.findOne<RoleDoc>(find, options)
+  }
 
-    async findOneByName(name: string, options?: IDatabaseFindOneOptions): Promise<RoleDoc> {
-        return this.roleRepository.findOne<RoleDoc>({ name }, options)
-    }
+  async findOneByName(name: string, options?: IDatabaseFindOneOptions): Promise<RoleDoc> {
+    return this.roleRepository.findOne<RoleDoc>({name}, options)
+  }
 
-    async getTotal(find?: Record<string, any>, options?: IDatabaseOptions): Promise<number> {
-        return this.roleRepository.getTotal(find, options)
-    }
+  async getTotal(find?: Record<string, any>, options?: IDatabaseOptions): Promise<number> {
+    return this.roleRepository.getTotal(find, options)
+  }
 
-    async existByName(name: string, options?: IDatabaseExistOptions): Promise<boolean> {
-        return this.roleRepository.exists(
-            {
-                name,
-            },
-            { ...options, withDeleted: true }
-        )
-    }
+  async existByName(name: string, options?: IDatabaseExistOptions): Promise<boolean> {
+    return this.roleRepository.exists(
+      {
+        name,
+      },
+      {...options, withDeleted: true}
+    )
+  }
 
-    async create(
-        { name, type, permissions }: RoleCreateDto,
-        options?: IDatabaseCreateOptions
-    ): Promise<RoleDoc> {
-        const create: RoleEntity = new RoleEntity()
-        create.name = name
-        create.type = type
-        create.permissions = permissions
-        create.isActive = true
+  async create({name, type, permissions}: RoleCreateDto, options?: IDatabaseCreateOptions): Promise<RoleDoc> {
+    const create: RoleEntity = new RoleEntity()
+    create.name = name
+    create.type = type
+    create.permissions = permissions
+    create.isActive = true
 
-        return this.roleRepository.create<RoleEntity>(create, options)
-    }
+    return this.roleRepository.create<RoleEntity>(create, options)
+  }
 
-    async update(repository: RoleDoc, { description }: RoleUpdateDto): Promise<RoleDoc> {
-        repository.description = description
+  async update(repository: RoleDoc, {description}: RoleUpdateDto): Promise<RoleDoc> {
+    repository.description = description
 
-        return this.roleRepository.save(repository)
-    }
+    return this.roleRepository.save(repository)
+  }
 
-    async updatePermissions(
-        repository: RoleDoc,
-        { permissions, type }: RoleUpdatePermissionDto
-    ): Promise<RoleDoc> {
-        repository.permissions = permissions
-        repository.type = type
+  async updatePermissions(repository: RoleDoc, {permissions, type}: RoleUpdatePermissionDto): Promise<RoleDoc> {
+    repository.permissions = permissions
+    repository.type = type
 
-        return this.roleRepository.save(repository)
-    }
+    return this.roleRepository.save(repository)
+  }
 
-    async active(repository: RoleDoc): Promise<RoleDoc> {
-        repository.isActive = true
+  async active(repository: RoleDoc): Promise<RoleDoc> {
+    repository.isActive = true
 
-        return this.roleRepository.save(repository)
-    }
+    return this.roleRepository.save(repository)
+  }
 
-    async inactive(repository: RoleDoc): Promise<RoleDoc> {
-        repository.isActive = false
+  async inactive(repository: RoleDoc): Promise<RoleDoc> {
+    repository.isActive = false
 
-        return this.roleRepository.save(repository)
-    }
+    return this.roleRepository.save(repository)
+  }
 
-    async delete(repository: RoleDoc): Promise<RoleDoc> {
-        return this.roleRepository.softDelete(repository)
-    }
+  async delete(repository: RoleDoc): Promise<RoleDoc> {
+    return this.roleRepository.softDelete(repository)
+  }
 
-    async deleteMany(find: Record<string, any>, options?: IDatabaseManyOptions): Promise<boolean> {
-        return this.roleRepository.deleteMany(find, options)
-    }
+  async deleteMany(find: Record<string, any>, options?: IDatabaseManyOptions): Promise<boolean> {
+    return this.roleRepository.deleteMany(find, options)
+  }
 
-    async createMany(
-        data: RoleCreateDto[],
-        options?: IDatabaseCreateManyOptions
-    ): Promise<boolean> {
-        const create: RoleEntity[] = data.map(({ type, name, permissions }) => {
-            const entity: RoleEntity = new RoleEntity()
-            entity.type = type
-            entity.isActive = true
-            entity.name = name
-            entity.permissions = permissions
+  async createMany(data: RoleCreateDto[], options?: IDatabaseCreateManyOptions): Promise<boolean> {
+    const create: RoleEntity[] = data.map(({type, name, permissions}) => {
+      const entity: RoleEntity = new RoleEntity()
+      entity.type = type
+      entity.isActive = true
+      entity.name = name
+      entity.permissions = permissions
 
-            return entity
-        })
-        return this.roleRepository.createMany<RoleEntity>(create, options)
-    }
+      return entity
+    })
+    return this.roleRepository.createMany<RoleEntity>(create, options)
+  }
 }

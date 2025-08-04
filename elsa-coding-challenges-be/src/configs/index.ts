@@ -10,14 +10,14 @@ import RequestConfig from './request.config'
 import UserConfig from './user.config'
 
 export default [
-    AppConfig,
-    AuthConfig,
-    DatabaseConfig,
-    HelperConfig,
-    RedisConfig,
-    UserConfig,
-    RequestConfig,
-    DocConfig,
-    DebuggerConfig,
-    MessageConfig,
+  AppConfig,
+  AuthConfig,
+  DatabaseConfig,
+  HelperConfig,
+  RedisConfig,
+  UserConfig,
+  RequestConfig,
+  DocConfig,
+  DebuggerConfig,
+  MessageConfig,
 ]

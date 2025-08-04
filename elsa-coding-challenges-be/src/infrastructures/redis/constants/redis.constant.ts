@@ -9,22 +9,22 @@ export const REDIS_DEFAULT_PASSWORD = ''
 export const REDIS_DEFAULT_PREFIX = 'elsa:'
 
 export const REDIS_CONNECTION = {
-    DEFAULT: 'default',
-    PUBSUB: 'pubsub',
+  DEFAULT: 'default',
+  PUBSUB: 'pubsub',
 }
 
 export const REDIS_EVENTS = {
-    CONNECT: 'connect',
-    READY: 'ready',
-    ERROR: 'error',
-    CLOSE: 'close',
-    RECONNECTING: 'reconnecting',
-    END: 'end',
+  CONNECT: 'connect',
+  READY: 'ready',
+  ERROR: 'error',
+  CLOSE: 'close',
+  RECONNECTING: 'reconnecting',
+  END: 'end',
 }
 
 export const REDIS_PUBSUB_EVENTS = {
-    MESSAGE: 'message',
-    SUBSCRIBE: 'subscribe',
-    UNSUBSCRIBE: 'unsubscribe',
-    ERROR: 'error',
+  MESSAGE: 'message',
+  SUBSCRIBE: 'subscribe',
+  UNSUBSCRIBE: 'unsubscribe',
+  ERROR: 'error',
 }

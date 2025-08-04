@@ -1,4 +1,4 @@
-import { ENUM_PAGINATION_ORDER_DIRECTION_TYPE } from '@infras/pagination/constants/pagination.enum.constant'
+import {ENUM_PAGINATION_ORDER_DIRECTION_TYPE} from '@infras/pagination/constants/pagination.enum.constant'
 
 export const API_KEY_DEFAULT_PER_PAGE = 20
 export const API_KEY_DEFAULT_ORDER_BY = 'createdAt'

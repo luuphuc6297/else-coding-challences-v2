@@ -1,69 +1,69 @@
-import { faker } from '@faker-js/faker'
-import { PAGINATION_AVAILABLE_ORDER_DIRECTION } from '@infras/pagination/constants/pagination.constant'
-import { ENUM_PAGINATION_ORDER_DIRECTION_TYPE } from '@infras/pagination/constants/pagination.enum.constant'
-import { RequestPaginationSerialization } from '@infras/request/serializations/request.pagination.serialization'
+import {faker} from '@faker-js/faker'
+import {PAGINATION_AVAILABLE_ORDER_DIRECTION} from '@infras/pagination/constants/pagination.constant'
+import {ENUM_PAGINATION_ORDER_DIRECTION_TYPE} from '@infras/pagination/constants/pagination.enum.constant'
+import {RequestPaginationSerialization} from '@infras/request/serializations/request.pagination.serialization'
 import {
-    ResponseDefaultSerialization,
-    ResponseMetadataSerialization,
+  ResponseDefaultSerialization,
+  ResponseMetadataSerialization,
 } from '@infras/response/serializations/response.default.serialization'
-import { ApiProperty, PickType } from '@nestjs/swagger'
+import {ApiProperty, PickType} from '@nestjs/swagger'
 
 export class ResponsePagingCursorMetadataSerialization {
-    nextPage?: string
-    previousPage?: string
-    firstPage?: string
-    lastPage?: string
+  nextPage?: string
+  previousPage?: string
+  firstPage?: string
+  lastPage?: string
 }
 
 export class ResponsePagingPaginationSerialization extends RequestPaginationSerialization {
-    total: number
-    totalPage: number
+  total: number
+  totalPage: number
 }
 
 export interface ResponsePagingMetadataSerialization extends ResponseMetadataSerialization {
-    cursor?: ResponsePagingCursorMetadataSerialization
-    pagination?: ResponsePagingPaginationSerialization
+  cursor?: ResponsePagingCursorMetadataSerialization
+  pagination?: ResponsePagingPaginationSerialization
 }
 
-export class ResponsePagingSerialization<T = Record<string, any>> extends PickType(
-    ResponseDefaultSerialization,
-    ['statusCode', 'message'] as const
-) {
-    @ApiProperty({
-        name: '_metadata',
-        nullable: false,
-        description: 'Contain metadata about API',
-        type: 'object',
-        additionalProperties: true,
-        example: {
-            languages: ['en'],
-            timestamp: 1660190937231,
-            timezone: 'Asia/Jakarta',
-            requestId: '40c2f734-7247-472b-bc26-8eff6e669781',
-            path: '/api/v1/test/hello',
-            version: '1',
-            repoVersion: '1.0.0',
-            pagination: {
-                search: faker.name.firstName(),
-                page: 1,
-                perPage: 20,
-                orderBy: 'createdAt',
-                orderDirection: ENUM_PAGINATION_ORDER_DIRECTION_TYPE.ASC,
-                availableSearch: ['name'],
-                availableOrderBy: ['createdAt'],
-                availableOrderDirection: PAGINATION_AVAILABLE_ORDER_DIRECTION,
-                total: 100,
-                totalPage: 5,
-            },
-            cursor: {
-                nextPage: `http://217.0.0.1/__path?perPage=10&page=3&search=abc`,
-                previousPage: `http://217.0.0.1/__path?perPage=10&page=1&search=abc`,
-                firstPage: `http://217.0.0.1/__path?perPage=10&page=1&search=abc`,
-                lastPage: `http://217.0.0.1/__path?perPage=10&page=20&search=abc`,
-            },
-        },
-    })
-    readonly _metadata: ResponsePagingMetadataSerialization
+export class ResponsePagingSerialization<T = Record<string, any>> extends PickType(ResponseDefaultSerialization, [
+  'statusCode',
+  'message',
+] as const) {
+  @ApiProperty({
+    name: '_metadata',
+    nullable: false,
+    description: 'Contain metadata about API',
+    type: 'object',
+    additionalProperties: true,
+    example: {
+      languages: ['en'],
+      timestamp: 1660190937231,
+      timezone: 'Asia/Jakarta',
+      requestId: '40c2f734-7247-472b-bc26-8eff6e669781',
+      path: '/api/v1/test/hello',
+      version: '1',
+      repoVersion: '1.0.0',
+      pagination: {
+        search: faker.name.firstName(),
+        page: 1,
+        perPage: 20,
+        orderBy: 'createdAt',
+        orderDirection: ENUM_PAGINATION_ORDER_DIRECTION_TYPE.ASC,
+        availableSearch: ['name'],
+        availableOrderBy: ['createdAt'],
+        availableOrderDirection: PAGINATION_AVAILABLE_ORDER_DIRECTION,
+        total: 100,
+        totalPage: 5,
+      },
+      cursor: {
+        nextPage: `http://217.0.0.1/__path?perPage=10&page=3&search=abc`,
+        previousPage: `http://217.0.0.1/__path?perPage=10&page=1&search=abc`,
+        firstPage: `http://217.0.0.1/__path?perPage=10&page=1&search=abc`,
+        lastPage: `http://217.0.0.1/__path?perPage=10&page=20&search=abc`,
+      },
+    },
+  })
+  readonly _metadata: ResponsePagingMetadataSerialization
 
-    readonly data: T[]
+  readonly data: T[]
 }

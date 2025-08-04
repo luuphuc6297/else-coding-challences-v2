@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common'
-import { QuizAttemptRepository } from '../repository/repositories/quiz-attempt.repository'
+import {Injectable} from '@nestjs/common'
+import {QuizAttemptRepository} from '../repository/repositories/quiz-attempt.repository'
 
 @Injectable()
 export class QuizAttemptService {
-    constructor(private readonly quizAttemptRepository: QuizAttemptRepository) {}
+  constructor(private readonly quizAttemptRepository: QuizAttemptRepository) {}
 }

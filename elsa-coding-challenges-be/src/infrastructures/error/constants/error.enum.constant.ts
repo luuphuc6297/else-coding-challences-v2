@@ -1,3 +1,3 @@
-export enum ERROR_TYPE {
-    DEFAULT = 'DEFAULT',
+export enum ENUM_ERROR_TYPE {
+  DEFAULT = 'DEFAULT',
 }

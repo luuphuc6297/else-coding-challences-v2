@@ -1,30 +1,26 @@
-import { IPaginationOptions } from '@infras/pagination/interfaces/pagination.interface'
-import { PopulateOptions } from 'mongoose'
+import {IPaginationOptions} from '@infras/pagination/interfaces/pagination.interface'
+import {PopulateOptions} from 'mongoose'
 
 export interface IDatabaseFindOneOptions<T = any> extends Pick<IPaginationOptions, 'order'> {
-    select?: Record<string, boolean | number>
-    join?: boolean | string | PopulateOptions | (string | PopulateOptions)[] | undefined
-    session?: T
-    withDeleted?: boolean
+  select?: Record<string, boolean | number>
+  join?: boolean | string | PopulateOptions | (string | PopulateOptions)[] | undefined
+  session?: T
+  withDeleted?: boolean
 }
 
-export type IDatabaseOptions<T = any> = Pick<
-    IDatabaseFindOneOptions<T>,
-    'session' | 'withDeleted' | 'join'
->
+export type IDatabaseOptions<T = any> = Pick<IDatabaseFindOneOptions<T>, 'session' | 'withDeleted' | 'join'>
 
 export interface IDatabaseFindAllOptions<T = any>
-    extends IPaginationOptions,
-        Omit<IDatabaseFindOneOptions<T>, 'order'> {}
+  extends IPaginationOptions,
+    Omit<IDatabaseFindOneOptions<T>, 'order'> {}
 
-export interface IDatabaseCreateOptions<T = any>
-    extends Pick<IDatabaseFindOneOptions<T>, 'session'> {
-    _id?: string
+export interface IDatabaseCreateOptions<T = any> extends Pick<IDatabaseFindOneOptions<T>, 'session'> {
+  _id?: string
 }
 
 // exist
 export interface IDatabaseExistOptions<T = any> extends IDatabaseOptions<T> {
-    excludeId?: string[]
+  excludeId?: string[]
 }
 
 // bulk

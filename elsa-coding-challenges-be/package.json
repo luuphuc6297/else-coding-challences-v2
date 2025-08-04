@@ -6,7 +6,9 @@
   "scripts": {
     "build": "nest build",
     "start:dev": "nest start --watch",
-    "start:prod": "node ."
+    "start:prod": "node .",
+    "format": "npx prettier --write \"src/**/*.{ts,js,json}\"",
+    "format:check": "npx prettier --check \"src/**/*.{ts,js,json}\""
   },
   "keywords": [],
   "author": "",

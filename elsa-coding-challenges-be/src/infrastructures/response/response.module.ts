@@ -1,9 +1,9 @@
-import { ResponseMiddlewareModule } from '@infras/response/middleware/response.middleware.module'
-import { Module } from '@nestjs/common'
+import {ResponseMiddlewareModule} from '@infras/response/middleware/response.middleware.module'
+import {Module} from '@nestjs/common'
 
 @Module({
-    controllers: [],
-    providers: [],
-    imports: [ResponseMiddlewareModule],
+  controllers: [],
+  providers: [],
+  imports: [ResponseMiddlewareModule],
 })
 export class ResponseModule {}

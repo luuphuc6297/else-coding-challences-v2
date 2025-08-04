@@ -1,18 +1,20 @@
-import { Module } from '@nestjs/common'
-import { MongooseModule } from '@nestjs/mongoose'
-import { QuizAttemptEntity, QuizAttemptSchema } from './entities/quiz-attempt.entity'
-import { QuizAttemptRepository } from './repositories/quiz-attempt.repository'
+import {BaseRepositoryModule} from '@infras/database/base-repository.module'
+import {Module} from '@nestjs/common'
+import {QuizAttemptEntity, QuizAttemptSchema} from './entities/quiz-attempt.entity'
+import {QuizAttemptRepository} from './repositories/quiz-attempt.repository'
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([
-            {
-                name: QuizAttemptEntity.name,
-                schema: QuizAttemptSchema,
-            },
-        ]),
-    ],
-    providers: [QuizAttemptRepository],
-    exports: [QuizAttemptRepository],
+  imports: [
+    BaseRepositoryModule.forFeature({
+      entities: [
+        {
+          name: QuizAttemptEntity.name,
+          schema: QuizAttemptSchema,
+        },
+      ],
+      repositories: [QuizAttemptRepository],
+    }),
+  ],
+  exports: [QuizAttemptRepository],
 })
 export class QuizAttemptRepositoryModule {}

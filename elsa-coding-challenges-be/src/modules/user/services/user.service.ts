@@ -1,13 +1,15 @@
-import { IDatabaseFindOneOptions } from '@infras/database/interfaces/database.interface'
-import { Injectable } from '@nestjs/common'
-import { UserDoc } from '../repository/entities/user.entity'
-import { UserRepository } from '../repository/repositories/user.repository'
+import {DatabaseGenericServiceAbstract} from '@infras/database/abstracts/database.generic.service.abstract'
+import {DatabaseModel} from '@infras/database/decorators/database.decorator'
+import {Injectable} from '@nestjs/common'
+import {Model} from 'mongoose'
+import {UserDoc, UserEntity} from '../repository/entities/user.entity'
 
 @Injectable()
-export class UserService {
-    constructor(private readonly userRepository: UserRepository) {}
-
-    async findOne(find: Record<string, any>, options?: IDatabaseFindOneOptions): Promise<UserDoc> {
-        return this.userRepository.findOne(find, options)
-    }
-} 
+export class UserService extends DatabaseGenericServiceAbstract<UserEntity, UserDoc> {
+  constructor(
+    @DatabaseModel(UserEntity.name)
+    private readonly userModel: Model<UserEntity>
+  ) {
+    super(userModel)
+  }
+}

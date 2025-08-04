@@ -1,0 +1,11 @@
+export enum ENUM_QUIZ_STATUS {
+  DRAFT = 'DRAFT',
+  PUBLISHED = 'PUBLISHED',
+  ARCHIVED = 'ARCHIVED',
+}
+
+export enum ENUM_QUIZ_DIFFICULTY {
+  EASY = 'EASY',
+  MEDIUM = 'MEDIUM',
+  HARD = 'HARD',
+}

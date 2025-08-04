@@ -4,6 +4,6 @@
   "getByName": "Get Setting by name Success.",
   "update": "Update Succeed",
   "error": {
-      "notFound": "Setting not found"
+    "notFound": "Setting not found"
   }
 }
